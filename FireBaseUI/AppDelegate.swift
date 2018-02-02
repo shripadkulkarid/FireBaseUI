@@ -1,21 +1,59 @@
-//
+
 //  AppDelegate.swift
 //  FireBaseUI
-//
 //  Created by Fortune Infocomm Pvt Ltd on 29/01/18.
 //  Copyright © 2018 Self. All rights reserved.
-//
 
 import UIKit
+import Firebase
+import FirebaseAuthUI
+import FirebaseGoogleAuthUI
+import FirebaseFacebookAuthUI
+import FirebaseTwitterAuthUI
+import FirebasePhoneAuthUI
+import TwitterKit
+import FBSDKLoginKit
+import GTMSessionFetcher
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate,FUIAuthDelegate {
+    fileprivate(set) var auth:Auth?
+    fileprivate(set) var authUI: FUIAuth? //only set internally but get externally
+    fileprivate(set) var authStateListenerHandle: AuthStateDidChangeListenerHandle?
+    
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        let authUI = FUIAuth.defaultAuthUI()
+         authUI?.delegate = self
+        TWTRTwitter.sharedInstance().start(withConsumerKey:"bz0KYl3D0bQIEYAavRiZ92Ts8",
+                                    consumerSecret:"SiLw09MrjrPwnAtGglczPiq3NfbI9a4vm47sOUANmTKWmBNceY")
+        GTMSessionFetcher.setLoggingEnabled(true)
+        let userDefaults = UserDefaults.standard
+        
+        if userDefaults.bool(forKey: "hasRunBefore") == false {
+            print("The app is launching for the first time. Setting UserDefaults...")
+            
+            do {
+                try Auth.auth().signOut()
+            } catch {
+                
+            }
+            
+            // Update the flag indicator
+            //userDefaults.setValue(true, forkey: "hasRunBefore")
+            userDefaults.setValue(true, forKey: "hasRunBefore")
+            userDefaults.synchronize() // This forces the app to update userDefaults
+            
+            // Run code here for the first launch
+            
+        } else {
+            print("The app has been launched before. Loading UserDefaults...")
+            // Run code here for every other launch but the first
+        }
         return true
     }
 
@@ -41,6 +79,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    //OPEn**********URL
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
+        return self.handleOpenUrl(url, sourceApplication: sourceApplication)
+    }
+    
+    @available(iOS 8.0, *)
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return self.handleOpenUrl(url, sourceApplication: sourceApplication)
+    }
+    
+    
+    func handleOpenUrl(_ url: URL, sourceApplication: String?) -> Bool {
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            return true
+        }
+        // other URL handling goes here.
+        return false
+    }
+
+    
+    override init() {
+        FirebaseApp.configure()
+    }
+    
+    
+    
+    
+    
+    
 
 }
 
