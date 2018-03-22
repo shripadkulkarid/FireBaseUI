@@ -45,6 +45,8 @@ class ViewController: UIViewController,AuthUIDelegate {
         }
     }
     
+    @IBAction func signout(_ sender: Any) {
+    }
     
     func loginAction(sender:AnyObject){
    
@@ -74,10 +76,25 @@ class ViewController: UIViewController,AuthUIDelegate {
     override func viewDidAppear(_ animated: Bool) {
 
         self.authStateListenerHandle = self.auth?.addStateDidChangeListener { (auth, user) in
- 
+            
+            
             if Auth.auth().currentUser != nil {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main1")
                 self.present(vc!, animated: true, completion: nil)
+                let u = user?.email
+                print("E-mail=",u!)
+                let pic = user?.photoURL
+                print("Pic URL=",pic!)
+                let Authid = user?.uid
+                print("U-ID=",Authid!)
+                
+                let name = user?.displayName
+                print("Name=",name!)
+                guard  let na = user?.phoneNumber else{return}
+                print("Phone no=",na)
+                let ma = user?.refreshToken
+                print("Refresh Token",ma!)
+                
                 
             }else{
                 let authViewController = self.authUI?.authViewController();

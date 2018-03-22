@@ -34,18 +34,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WELCOME BRO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pf-aP-d0s">
-                                <rect key="frame" x="78" y="136" width="218" height="42"/>
+                                <rect key="frame" x="80" y="51" width="218" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox1-8I-bD5">
+                                <rect key="frame" x="138" y="230.5" width="90" height="51.5"/>
+                                <state key="normal" title="Sign out"/>
+                                <connections>
+                                    <action selector="signout:" destination="4ih-Mj-mEa" eventType="touchUpInside" id="rr7-LT-Ciw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ssK-fy-NCV" firstAttribute="trailing" secondItem="2pf-aP-d0s" secondAttribute="trailing" constant="79" id="7Sa-vk-nmW"/>
-                            <constraint firstItem="2pf-aP-d0s" firstAttribute="top" secondItem="ssK-fy-NCV" secondAttribute="top" constant="116" id="fUF-gt-Hly"/>
-                            <constraint firstItem="ssK-fy-NCV" firstAttribute="bottom" secondItem="2pf-aP-d0s" secondAttribute="bottom" constant="489" id="mXM-LO-nJv"/>
-                            <constraint firstItem="2pf-aP-d0s" firstAttribute="leading" secondItem="ssK-fy-NCV" secondAttribute="leading" constant="78" id="vEs-8I-f2u"/>
+                            <constraint firstItem="ssK-fy-NCV" firstAttribute="trailing" secondItem="Ox1-8I-bD5" secondAttribute="trailing" constant="147" id="MZ7-i6-0tp"/>
+                            <constraint firstItem="ssK-fy-NCV" firstAttribute="bottom" secondItem="Ox1-8I-bD5" secondAttribute="bottom" constant="385" id="PY4-ee-BCg"/>
+                            <constraint firstItem="ssK-fy-NCV" firstAttribute="trailing" secondItem="2pf-aP-d0s" secondAttribute="trailing" constant="77" id="ToR-W8-BrO"/>
+                            <constraint firstItem="2pf-aP-d0s" firstAttribute="leading" secondItem="ssK-fy-NCV" secondAttribute="leading" constant="80" id="dVv-tF-dam"/>
+                            <constraint firstItem="2pf-aP-d0s" firstAttribute="top" secondItem="ssK-fy-NCV" secondAttribute="top" constant="31" id="kSS-Dk-Tz0"/>
+                            <constraint firstItem="Ox1-8I-bD5" firstAttribute="top" secondItem="2pf-aP-d0s" secondAttribute="bottom" constant="159" id="x2E-5K-WhF"/>
+                            <constraint firstItem="Ox1-8I-bD5" firstAttribute="leading" secondItem="ssK-fy-NCV" secondAttribute="leading" constant="138" id="yhX-94-tRp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssK-fy-NCV"/>
                     </view>
